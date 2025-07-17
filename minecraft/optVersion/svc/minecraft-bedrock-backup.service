@@ -1,0 +1,8 @@
+[Unit]
+Description=Backup Minecraft Bedrock World using /root/Backup.sh
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /root/Backup.sh
+
+
