@@ -3,9 +3,12 @@ Description=Minecraft Bedrock Server
 After=network.target
 
 [Service]
+Type=forking
 User=root
 WorkingDirectory=/root/currentVersion/
-ExecStart=/root/currentVersion/bedrock_server
+ExecStart=/usr/bin/tmux new-session -d -s mc \; pipe-pane -o 'systemd-cat -t mc'
+ExecStartPost=/usr/bin/tmux send-keys -t mc 'cd /root/currentVersion/ && /root/currentVersion/bedrock_server' C-m
+ExecStop=/usr/bin/tmux kill-session -t mc
 Restart=on-failure
 RestartSec=10
 
