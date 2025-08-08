@@ -1,0 +1,6 @@
+[Unit]
+Description=Sync the Siteforest
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /root/updateSiteForest.sh

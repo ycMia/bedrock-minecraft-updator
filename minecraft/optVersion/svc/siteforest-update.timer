@@ -1,0 +1,10 @@
+[Unit]
+Description=timer for updating siteforest - 120s
+
+[Timer]
+OnUnitActiveSec=120s
+AccuracySec=10s
+Unit=siteforest-update.service
+
+[Install]
+WantedBy=multi-user.target
