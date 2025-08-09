@@ -4,13 +4,14 @@ After=network.target
 
 [Service]
 Type=forking
-User=root
-WorkingDirectory=/root/currentVersion/
-ExecStart=/usr/bin/tmux new-session -d -s mc \; pipe-pane -o 'systemd-cat -t mc'
-ExecStartPost=/usr/bin/tmux send-keys -t mc 'cd /root/currentVersion/ && /root/currentVersion/bedrock_server' C-m
-ExecStop=/usr/bin/tmux kill-session -t mc
-Restart=on-failure
-RestartSec=10
+User=minecraft
+Group=minecraft
+WorkingDirectory=/home/minecraft/currentVersion
+ExecStart=/usr/bin/script -q -c "~/currentVersion/bedrock_server_tmux.sh" /dev/null
+#ExecStop=/usr/bin/tmux send-keys -t mcs 'say SERVER SHUTTING DOWN IN 10 SECONDS' Enter
+#ExecStop=/usr/bin/sleep 10
+ExecStop=/usr/bin/tmux send-keys -t mcs 'stop' Enter
+KillMode=none
 
 [Install]
 WantedBy=multi-user.target
